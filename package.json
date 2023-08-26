@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node --test tests",
-    "lint": "eslint",
+    "lint": "eslint .",
     "dev": "node --watch server.js",
     "coverage": "npx nyc --all --reporter html --reporter text node --test"
   },

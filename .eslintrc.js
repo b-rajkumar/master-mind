@@ -1,12 +1,12 @@
 module.exports = {
   env: {
-    "es2021": true,
+    es2021: true,
   },
   parserOptions: {
     ecmaVersion: "latest",
   },
   rules: {
-    "semi": "warn",
+    semi: "warn",
     "array-callback-return": ["error", { checkForEach: true }],
     "no-cond-assign": "error",
     "no-dupe-keys": "error",
@@ -15,11 +15,11 @@ module.exports = {
     "no-this-before-super": "error",
     "use-isnan": "error",
     "valid-typeof": "error",
-    "camelcase": "warn",
-    "complexity": ["warn", 10],
+    camelcase: "warn",
+    complexity: ["warn", 3],
     "default-param-last": "error",
     "dot-notation": "warn",
-    "eqeqeq": "warn",
+    eqeqeq: "warn",
     "max-depth": ["warn", 3],
     "max-statements": "warn",
     "new-cap": "error",
@@ -33,8 +33,7 @@ module.exports = {
     "no-useless-escape": "warn",
     "prefer-const": "warn",
     "comma-spacing": ["warn", { before: false, after: true }],
-    "key-spacing": ["error", { "beforeColon": true }],
     "max-len": "error",
-    "no-multiple-empty-lines": "error"
+    "no-multiple-empty-lines": "error",
   },
 };
