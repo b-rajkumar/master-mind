@@ -1,8 +1,8 @@
 const request = require("supertest");
 const { describe, it } = require("node:test");
 const assert = require("assert");
-const createApp = require("../../src/app");
 const { isUserPresent } = require("../../src/middlewares/authenticate");
+const { createApp } = require("../../src/app");
 
 describe("isUserPresent", () => {
   // eslint-disable-next-line max-len
