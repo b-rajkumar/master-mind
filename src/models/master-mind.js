@@ -1,16 +1,24 @@
 class MasterMind {
   #hasWon;
+  #guesses;
   #isGameOver;
   #attemptsLeft;
   #numberOfAttempts;
   #secretColorCombination;
 
   constructor(secretColorCombination, numberOfAttempts = 10) {
+    this.#guesses = [];
     this.#hasWon = false;
     this.#isGameOver = false;
     this.#attemptsLeft = numberOfAttempts;
     this.#numberOfAttempts = numberOfAttempts;
     this.#secretColorCombination = secretColorCombination;
+  }
+
+  #getGuesses() {
+    return this.#guesses.map(({ guessColorCombination, result }) => {
+      return { guessColorCombination, result };
+    });
   }
 
   #extractColorDetails(colorCombination) {
@@ -61,6 +69,7 @@ class MasterMind {
       this.#hasWon = true;
       this.#isGameOver = true;
     }
+    this.#guesses.push({ guessColorCombination, result });
 
     return { ...result, hasWon: this.#hasWon, isGameOver: this.#isGameOver };
   }
@@ -71,6 +80,7 @@ class MasterMind {
       hasWon: this.#hasWon,
       numberOfAttempts: this.#numberOfAttempts,
       attemptsLeft: this.#attemptsLeft,
+      guesses: this.#getGuesses(),
     };
 
     if (this.#isGameOver)

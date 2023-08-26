@@ -10,6 +10,7 @@ describe("MasterMind", () => {
       hasWon: false,
       numberOfAttempts: 10,
       attemptsLeft: 10,
+      guesses: [],
     };
 
     assert.deepStrictEqual(masterMind.gameStats(), expectedGameStats);
@@ -24,9 +25,32 @@ describe("MasterMind", () => {
       hasWon: false,
       numberOfAttempts: 5,
       attemptsLeft: 0,
+      guesses: [
+        {
+          guessColorCombination: "WRGBW",
+          result: { R: 1, W: 3 },
+        },
+        {
+          guessColorCombination: "WRGBW",
+          result: { R: 1, W: 3 },
+        },
+        {
+          guessColorCombination: "WRGBW",
+          result: { R: 1, W: 3 },
+        },
+        {
+          guessColorCombination: "WRGBW",
+          result: { R: 1, W: 3 },
+        },
+        {
+          guessColorCombination: "WRGBW",
+          result: { R: 1, W: 3 },
+        },
+      ],
     };
 
     for (let i = 0; i < 5; i++) masterMind.validateGuess(guessColorCombination);
+    console.log(JSON.stringify(masterMind.gameStats()));
 
     assert.deepStrictEqual(masterMind.gameStats(), expectedGameStats);
   });
@@ -34,11 +58,30 @@ describe("MasterMind", () => {
   describe("gameStats", () => {
     it("should give the stats of the game", () => {
       const masterMind = new MasterMind("RGBYW", 5);
+      masterMind.validateGuess("RGNOW");
+      masterMind.validateGuess("YWBGR");
+
       const expectedGameStats = {
         isGameOver: false,
         hasWon: false,
         numberOfAttempts: 5,
-        attemptsLeft: 5,
+        attemptsLeft: 3,
+        guesses: [
+          {
+            guessColorCombination: "RGNOW",
+            result: {
+              R: 3,
+              W: 0,
+            },
+          },
+          {
+            guessColorCombination: "YWBGR",
+            result: {
+              R: 1,
+              W: 4,
+            },
+          },
+        ],
       };
 
       assert.deepStrictEqual(masterMind.gameStats(), expectedGameStats);
@@ -92,7 +135,7 @@ describe("MasterMind", () => {
       const guessResult = masterMind.validateGuess(guessColorCombination);
 
       assert.deepStrictEqual(guessResult, {
-        isGameOver: false,
+        isGameOver: true,
         hasWon: false,
       });
     });
