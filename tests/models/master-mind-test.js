@@ -1,15 +1,8 @@
-const { describe, it, beforeEach } = require("node:test");
+const { describe, it } = require("node:test");
 const assert = require("assert");
 const MasterMind = require("../../src/models/master-mind");
 
 describe("MasterMind", () => {
-  let masterMind;
-  beforeEach(() => {
-    const secretColorCombination = "RGBYW";
-    const numberOfAttempts = 5;
-    masterMind = new MasterMind(secretColorCombination, numberOfAttempts);
-  });
-
   it("should consider 10 attempts as default attempts count", () => {
     const masterMind = new MasterMind("RGBYW");
     const expectedGameStats = {
@@ -23,6 +16,7 @@ describe("MasterMind", () => {
   });
 
   it("should reveal the color combination, if the user failed to guess", () => {
+    const masterMind = new MasterMind("RGBYW", 5);
     const guessColorCombination = "WRGBW";
     const expectedGameStats = {
       secretColorCombination: "RGBYW",
@@ -39,6 +33,7 @@ describe("MasterMind", () => {
 
   describe("gameStats", () => {
     it("should give the stats of the game", () => {
+      const masterMind = new MasterMind("RGBYW", 5);
       const expectedGameStats = {
         isGameOver: false,
         hasWon: false,
@@ -52,6 +47,7 @@ describe("MasterMind", () => {
 
   describe("validateGuess", () => {
     it("should validate the given guess and give the analysis of guess", () => {
+      const masterMind = new MasterMind("RGBYW", 5);
       const guessColorCombination = "NRNOO";
       const guessResult = masterMind.validateGuess(guessColorCombination);
 
@@ -64,6 +60,7 @@ describe("MasterMind", () => {
     });
 
     it("should give R count as 5 when the guess is correct", () => {
+      const masterMind = new MasterMind("RGBYW", 5);
       const guessColorCombination = "RGBYW";
       const guessResult = masterMind.validateGuess(guessColorCombination);
 
@@ -76,12 +73,25 @@ describe("MasterMind", () => {
     });
 
     it("should mark the colors matched in same position first", () => {
+      const masterMind = new MasterMind("RGBYW", 5);
       const guessColorCombination = "GGGGG";
       const guessResult = masterMind.validateGuess(guessColorCombination);
 
       assert.deepStrictEqual(guessResult, {
         R: 1,
         W: 0,
+        isGameOver: false,
+        hasWon: false,
+      });
+    });
+
+    it("should give the game over stats, if the attempts left is 0", () => {
+      const masterMind = new MasterMind("RGBYW", 1);
+      const guessColorCombination = "GGGGG";
+      masterMind.validateGuess(guessColorCombination);
+      const guessResult = masterMind.validateGuess(guessColorCombination);
+
+      assert.deepStrictEqual(guessResult, {
         isGameOver: false,
         hasWon: false,
       });
