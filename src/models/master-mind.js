@@ -45,17 +45,24 @@ class MasterMind {
   }
 
   validateGuess(guessColorCombination) {
+    if (this.#isGameOver)
+      return {
+        hasWon: this.#hasWon,
+        isGameOver: this.#isGameOver,
+      };
+
     this.#attemptsLeft -= 1;
     if (this.#attemptsLeft === 0) this.#isGameOver = true;
 
     const colorCombination = guessColorCombination.toUpperCase();
     const result = this.#analyseGuessColorCombination(colorCombination);
+
     if (result.R === 5) {
       this.#hasWon = true;
       this.#isGameOver = true;
     }
 
-    return result;
+    return { ...result, hasWon: this.#hasWon, isGameOver: this.#isGameOver };
   }
 
   gameStats() {
