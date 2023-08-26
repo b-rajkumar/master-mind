@@ -50,7 +50,6 @@ describe("MasterMind", () => {
     };
 
     for (let i = 0; i < 5; i++) masterMind.validateGuess(guessColorCombination);
-    console.log(JSON.stringify(masterMind.gameStats()));
 
     assert.deepStrictEqual(masterMind.gameStats(), expectedGameStats);
   });

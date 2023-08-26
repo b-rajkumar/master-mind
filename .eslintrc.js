@@ -25,7 +25,6 @@ module.exports = {
     "new-cap": "error",
     "no-eval": "warn",
     "no-extra-semi": "warn",
-    "no-magic-numbers": ["warn", { ignoreArrayIndexes: true }],
     "no-nested-ternary": "warn",
     "no-plusplus": "warn",
     "no-undef-init": "warn",
@@ -35,5 +34,6 @@ module.exports = {
     "comma-spacing": ["warn", { before: false, after: true }],
     "max-len": "error",
     "no-multiple-empty-lines": "error",
+    "no-console": "error",
   },
 };
