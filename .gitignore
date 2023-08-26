@@ -1,0 +1,7 @@
+node_modules
+.DS*
+.sw.
+data
+coverage
+.nyc_output
+todo.md

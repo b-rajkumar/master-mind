@@ -1,0 +1,20 @@
+#! /bin/bash
+
+function main() {
+  echo "--- Executing Lint ---"
+  npm run lint
+  LINT_STATUS_CODE=$(echo $?)
+
+  echo "--- Executing Tests ---"
+  npm test
+  TEST_STATUS_CODE=$(echo $?)
+
+  echo "--- Executing Test Coverage ---"
+  npm run coverage
+  COVERAGE_STATUS_CODE=$(echo $?)
+
+  [ $LINT_STATUS_CODE -eq 0 ] && [ $TEST_STATUS_CODE -eq 0 ] && [ $COVERAGE_STATUS_CODE -eq 0 ]
+  return $?
+}
+
+main

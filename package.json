@@ -1,0 +1,24 @@
+{
+  "name": "todo-b-rajkumar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "todo.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests",
+    "lint": "eslint",
+    "dev": "node --watch server.js",
+    "coverage": "npx nyc --all --reporter html --reporter text node --test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "nyc": "^15.1.0",
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
