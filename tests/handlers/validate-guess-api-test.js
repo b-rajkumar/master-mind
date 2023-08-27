@@ -40,6 +40,7 @@ describe("POST /game/validate-guess", () => {
         .set("Cookie", "name=raj")
         .expect(400)
         .expect(
+          // eslint-disable-next-line max-len
           "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body"
         )
         .end(done);
@@ -58,6 +59,7 @@ describe("POST /game/validate-guess", () => {
         .set("Cookie", "name=raj")
         .expect(400)
         .expect(
+          // eslint-disable-next-line max-len
           "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body"
         )
         .end(done);

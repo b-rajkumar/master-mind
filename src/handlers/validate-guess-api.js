@@ -7,11 +7,10 @@ const isValidColorCombination = colorCombination => {
 };
 
 const sendInvalidData = res => {
-  res
-    .status(400)
-    .end(
-      "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body"
-    );
+  res.status(400).end(
+    // eslint-disable-next-line max-len
+    "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body"
+  );
 };
 
 const sendBadRequest = res => {
