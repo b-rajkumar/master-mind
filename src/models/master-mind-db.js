@@ -19,7 +19,7 @@ class MasterMindDB {
   }
 
   #updateDataBase() {
-    const updateData = JSON.stringify(this.#updateQueue.pop());
+    const updateData = this.#updateQueue.pop();
     this.#isWriting = true;
     this.#writeFile("./data/players-stats.json", updateData, () => {
       if (this.#updateQueue.length === 0) return (this.#isWriting = false);
@@ -28,10 +28,8 @@ class MasterMindDB {
   }
 
   #updatePlayerStats() {
-    if (this.#isWriting) {
-      this.#updateQueue.push(this.#playersStats);
-      return;
-    }
+    this.#updateQueue.push(JSON.stringify(this.#playersStats));
+    if (this.#isWriting) return;
 
     this.#updateDataBase();
   }

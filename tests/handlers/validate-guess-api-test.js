@@ -40,7 +40,7 @@ describe("POST /game/validate-guess", () => {
         .set("Cookie", "name=raj")
         .expect(400)
         .expect(
-          "Expected '{guess: colorCombination}' in json format as Request body"
+          "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body"
         )
         .end(done);
     });
@@ -58,7 +58,7 @@ describe("POST /game/validate-guess", () => {
         .set("Cookie", "name=raj")
         .expect(400)
         .expect(
-          "Expected '{guess: colorCombination}' in json format as Request body"
+          "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body"
         )
         .end(done);
     });

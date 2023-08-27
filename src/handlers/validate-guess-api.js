@@ -9,7 +9,9 @@ const isValidColorCombination = colorCombination => {
 const sendInvalidData = res => {
   res
     .status(400)
-    .end("Expected '{guess: colorCombination}' in json format as Request body");
+    .end(
+      "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body"
+    );
 };
 
 const sendBadRequest = res => {

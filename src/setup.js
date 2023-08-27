@@ -11,8 +11,8 @@ const { handleValidateGuess } = require("./handlers/validate-guess-api");
 
 const setupApp = app => {
   app.use(logRequest);
-  app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
   app.use(parseCookies);
   app.use(isUserPresent);
   app.get("/", serveHomePage);
