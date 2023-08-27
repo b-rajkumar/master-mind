@@ -1,17 +1,47 @@
 class MasterMindDB {
   #users;
   #writeFile;
+  #updateQueue;
+  #isWriting;
   #playersStats;
 
   constructor(users, playersStats, writeFile) {
     this.#users = [...users];
     this.#playersStats = playersStats;
     this.#writeFile = writeFile;
+    this.#updateQueue = [];
+    this.#isWriting = false;
   }
 
   registerUser(username) {
     this.#users.push(username);
     this.#writeFile("./data/users.json", JSON.stringify(this.#users), () => {});
+  }
+
+  #updateDataBase() {
+    const updateData = JSON.stringify(this.#updateQueue.pop());
+    this.#isWriting = true;
+    this.#writeFile("./data/players-stats.json", updateData, () => {
+      if (this.#updateQueue.length === 0) return (this.#isWriting = false);
+      this.#updateDataBase();
+    });
+  }
+
+  #updatePlayerStats() {
+    if (this.#isWriting) {
+      this.#updateQueue.push(this.#playersStats);
+      return;
+    }
+
+    this.#updateDataBase();
+  }
+
+  addGameStats(player, gameStats) {
+    const playerStats = this.#playersStats[player] || { games: [] };
+    playerStats.games.push(gameStats);
+    this.#playersStats[player] = playerStats;
+
+    this.#updatePlayerStats();
   }
 
   getPlayerStats(player) {

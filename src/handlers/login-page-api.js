@@ -14,7 +14,7 @@ const registerUser = (req, res) => {
 
   res
     .status(400)
-    .end("Expected 'name=username' in urlencoded way as Request body");
+    .end("Expected 'name=username' in urlencoded format as Request body");
 };
 
 module.exports = { serveLoginPage, registerUser };

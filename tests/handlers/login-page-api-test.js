@@ -52,7 +52,7 @@ describe("POST /login", () => {
     request(app)
       .post("/login")
       .expect(400)
-      .expect("Expected 'name=username' in urlencoded way as Request body")
+      .expect("Expected 'name=username' in urlencoded format as Request body")
       .end(done);
   });
 });

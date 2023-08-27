@@ -88,6 +88,10 @@ class MasterMind {
 
     return stats;
   }
+
+  isGameOver() {
+    return this.#isGameOver;
+  }
 }
 
 module.exports = MasterMind;

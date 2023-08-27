@@ -79,4 +79,27 @@ describe("masterMindDB", () => {
 
     assert.deepStrictEqual(masterMindDB.getPlayerStats("raj"), expectedStats);
   });
+
+  describe("addGameStats", () => {
+    it("should add the game stats of the given player", context => {
+      const users = ["raj", "krishna"];
+      const playersStats = {};
+      const writeFile = context.mock.fn();
+      const masterMindDB = new MasterMindDB(users, playersStats, writeFile);
+      masterMindDB.addGameStats("raj", {
+        secretColorCombination: "RGBYW",
+        isGameOver: true,
+        hasWon: false,
+        numberOfAttempts: 1,
+        attemptsLeft: 0,
+        guesses: [
+          {
+            guessColorCombination: "WRGBW",
+            result: { R: 1, W: 3 },
+          },
+        ],
+      });
+      assert.strictEqual(writeFile.mock.callCount(), 1);
+    });
+  });
 });

@@ -7,9 +7,11 @@ const { serveLoginPage, registerUser } = require("./handlers/login-page-api");
 const { handlePlayerStats } = require("./handlers/player-stats-api-test");
 const { serveGamePage } = require("./handlers/game-page-api");
 const { handleGameStart } = require("./handlers/game-start-api");
+const { handleValidateGuess } = require("./handlers/validate-guess-api");
 
 const setupApp = app => {
   app.use(logRequest);
+  app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(parseCookies);
   app.use(isUserPresent);
@@ -19,6 +21,7 @@ const setupApp = app => {
   app.get("/player-stats", handlePlayerStats);
   app.get("/game", serveGamePage);
   app.get("/game/start", handleGameStart);
+  app.post("/game/validate-guess", handleValidateGuess);
 };
 
 module.exports = { setupApp };
