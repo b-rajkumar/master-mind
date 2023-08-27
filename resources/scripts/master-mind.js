@@ -9,6 +9,18 @@ const colorMapping = {
   N: "brown",
 };
 
+const generateCircle = (color, radius) => {
+  return `<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+  >
+    <circle cx="20" cy="20" r="${radius}" fill=${color} />
+  </svg>`;
+};
+
 const displayResult = (hasWon, secretCombination) => {
   const resultBox = document.querySelector("#result-box");
   if (hasWon) {
@@ -34,7 +46,7 @@ const updateAttempts = (rowNumber, guess) => {
   Array.from(guess).forEach((color, i) => {
     const colorName = colorMapping[color];
     const box = boxes[i];
-    box.classList.add(colorName);
+    box.innerHTML = generateCircle(colorName, 18);
   });
 };
 
@@ -47,7 +59,7 @@ const updateResult = (rowNumber, R, W) => {
   Array.from(colorCombination).forEach((color, i) => {
     const colorName = colorMapping[color];
     const box = boxes[i];
-    box.classList.add(colorName);
+    box.innerHTML = generateCircle(colorName, 12);
   });
 };
 
@@ -98,9 +110,16 @@ const startGame = () => {
     });
 };
 
+const displayPlayername = () => {
+  const usernameContainer = document.querySelector("#username");
+  const cookies = extractCookies(document.cookie);
+  usernameContainer.innerText = cookies.name;
+};
+
 const main = () => {
-  setupSubmitButton();
   startGame();
+  displayPlayername();
+  setupSubmitButton();
 };
 
 window.onload = main;

@@ -10,9 +10,12 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1em;
-  border-bottom: 2px solid black;
   margin-bottom: 1em;
+  border-bottom: 2px solid black;
 }
 
 main {
@@ -24,6 +27,9 @@ main {
   height: 50px;
   width: 50px;
   border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
@@ -35,8 +41,8 @@ main {
 #board {
   display: flex;
   gap: 1em;
-  background-color: lightgray;
   padding: 1em;
+  background-color: #dedede;
 }
 
 .heading {

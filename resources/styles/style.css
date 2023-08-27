@@ -9,9 +9,16 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1em;
-  border-bottom: 2px solid black;
   margin-bottom: 1em;
+  border-bottom: 2px solid black;
+}
+
+main {
+  margin: 1em;
 }
 
 #start-btn {
