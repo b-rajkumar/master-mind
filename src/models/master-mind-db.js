@@ -11,7 +11,14 @@ class MasterMindDB {
 
   registerUser(username) {
     this.#users.push(username);
-    this.#writeFile("../data/users", JSON.stringify(this.#users), () => {});
+    this.#writeFile("./data/users.json", JSON.stringify(this.#users), () => {});
+  }
+
+  getPlayerStats(player) {
+    const playerStats = this.#playersStats[player];
+    if (playerStats) return JSON.parse(JSON.stringify(playerStats));
+
+    return {};
   }
 
   getUsers() {
