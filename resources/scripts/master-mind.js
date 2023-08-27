@@ -2,7 +2,7 @@ const colorMapping = {
   R: "red",
   G: "green",
   B: "blue",
-  W: "white",
+  W: "#dddddd",
   O: "orange",
   P: "purple",
   Y: "yellow",
