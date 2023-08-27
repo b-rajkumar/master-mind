@@ -6,6 +6,7 @@ const { serveHomePage } = require("./handlers/home-page-api");
 const { serveLoginPage, registerUser } = require("./handlers/login-page-api");
 const { handlePlayerStats } = require("./handlers/player-stats-api-test");
 const { serveGamePage } = require("./handlers/game-page-api");
+const { handleGameStart } = require("./handlers/game-start-api");
 
 const setupApp = app => {
   app.use(logRequest);
@@ -17,6 +18,7 @@ const setupApp = app => {
   app.post("/login", registerUser);
   app.get("/player-stats", handlePlayerStats);
   app.get("/game", serveGamePage);
+  app.get("/game/start", handleGameStart);
 };
 
 module.exports = { setupApp };
