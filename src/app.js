@@ -1,9 +1,9 @@
 const express = require("express");
-const { setupApp } = require("./handlers/setup");
+const { setupApp } = require("./setup");
 
-const createApp = (users = []) => {
+const createApp = masterMindDB => {
   const app = express();
-  app.users = users;
+  app.masterMindDB = masterMindDB;
   setupApp(app);
 
   return app;

@@ -3,10 +3,12 @@ const serveLoginPage = (req, res) => {
 };
 
 const registerUser = (req, res) => {
-  const users = req.app.users;
+  const masterMindDB = req.app.masterMindDB;
+  const users = masterMindDB.getUsers();
   const username = req.body.name;
-  if (username && !users.includes(username)) {
-    req.app.users.push(username);
+
+  if (username) {
+    if (!users.includes(username)) masterMindDB.registerUser(username);
     return res.redirect("/");
   }
 

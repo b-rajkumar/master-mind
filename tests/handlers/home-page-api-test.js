@@ -1,11 +1,12 @@
 const { describe, it } = require("node:test");
 const request = require("supertest");
 const { createApp } = require("../../src/app");
+const MasterMindDB = require("../../src/models/master-mind-db");
 
 describe("GET /", () => {
   it("should serve the homepage", (_, done) => {
-    const users = ["raj"];
-    const app = createApp(users);
+    const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
+    const app = createApp(masterMindDB);
 
     request(app)
       .get("/")
