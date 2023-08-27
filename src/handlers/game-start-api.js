@@ -16,7 +16,6 @@ const handleGameStart = (req, res) => {
 
   if (!game) {
     const secretColorCombination = generateSecretColorCombination();
-    console.log(secretColorCombination);
     game = new MasterMind(secretColorCombination);
     app.games[player] = game;
   }
