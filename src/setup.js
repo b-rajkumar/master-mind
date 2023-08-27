@@ -22,6 +22,7 @@ const setupApp = app => {
   app.get("/game", serveGamePage);
   app.get("/game/start", handleGameStart);
   app.post("/game/validate-guess", handleValidateGuess);
+  app.use(express.static("./resources"));
 };
 
 module.exports = { setupApp };

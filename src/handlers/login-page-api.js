@@ -1,5 +1,5 @@
 const serveLoginPage = (req, res) => {
-  res.sendFile(`${process.env.PWD}/resources/login.html`);
+  res.sendFile(`${process.env.PWD}/resources/pages/login-page.html`);
 };
 
 const registerUser = (req, res) => {

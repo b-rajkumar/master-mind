@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 1em;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+
+header {
+  display: flex;
+  gap: 1em;
+  padding: 0.5em;
+  justify-content: center;
+  border-bottom: 1px solid black;
+}
+
+form {
+  margin-top: 1em;
+  display: flex;
+  gap: 0.5em;
+}
+
+form input[name="name"],
+input[type="submit"] {
+  font-size: 1em;
+  padding: 0.5em;
+  border-radius: 10px;
+  border: 1px solid grey;
+}

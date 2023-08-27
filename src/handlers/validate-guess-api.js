@@ -1,8 +1,9 @@
 const isValidColorCombination = colorCombination => {
   const colors = ["R", "G", "B", "W", "Y", "O", "P", "N"];
 
-  return [...colorCombination.toUpperCase()].every(color =>
-    colors.includes(color)
+  return (
+    colorCombination.length === 5 &&
+    [...colorCombination.toUpperCase()].every(color => colors.includes(color))
   );
 };
 
