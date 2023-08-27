@@ -9,7 +9,8 @@ const registerUser = (req, res) => {
 
   if (username) {
     if (!users.includes(username)) masterMindDB.registerUser(username);
-    return res.redirect("/");
+
+    return res.cookie("name", username).redirect("/");
   }
 
   res
