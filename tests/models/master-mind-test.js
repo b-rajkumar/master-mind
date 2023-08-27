@@ -18,7 +18,7 @@ describe("MasterMind", () => {
 
   it("should reveal the color combination, if the user failed to guess", () => {
     const masterMind = new MasterMind("RGBYW", 5);
-    const guessColorCombination = "WRGBW";
+    const guess = "WRGBW";
     const expectedGameStats = {
       secretColorCombination: "RGBYW",
       isGameOver: true,
@@ -27,29 +27,29 @@ describe("MasterMind", () => {
       attemptsLeft: 0,
       guesses: [
         {
-          guessColorCombination: "WRGBW",
+          guess: "WRGBW",
           result: { R: 1, W: 3 },
         },
         {
-          guessColorCombination: "WRGBW",
+          guess: "WRGBW",
           result: { R: 1, W: 3 },
         },
         {
-          guessColorCombination: "WRGBW",
+          guess: "WRGBW",
           result: { R: 1, W: 3 },
         },
         {
-          guessColorCombination: "WRGBW",
+          guess: "WRGBW",
           result: { R: 1, W: 3 },
         },
         {
-          guessColorCombination: "WRGBW",
+          guess: "WRGBW",
           result: { R: 1, W: 3 },
         },
       ],
     };
 
-    for (let i = 0; i < 5; i++) masterMind.validateGuess(guessColorCombination);
+    for (let i = 0; i < 5; i++) masterMind.validateGuess(guess);
 
     assert.deepStrictEqual(masterMind.gameStats(), expectedGameStats);
   });
@@ -67,14 +67,14 @@ describe("MasterMind", () => {
         attemptsLeft: 3,
         guesses: [
           {
-            guessColorCombination: "RGNOW",
+            guess: "RGNOW",
             result: {
               R: 3,
               W: 0,
             },
           },
           {
-            guessColorCombination: "YWBGR",
+            guess: "YWBGR",
             result: {
               R: 1,
               W: 4,
@@ -90,12 +90,13 @@ describe("MasterMind", () => {
   describe("validateGuess", () => {
     it("should validate the given guess and give the analysis of guess", () => {
       const masterMind = new MasterMind("RGBYW", 5);
-      const guessColorCombination = "NRNOO";
-      const guessResult = masterMind.validateGuess(guessColorCombination);
+      const guess = "NRNOO";
+      const guessResult = masterMind.validateGuess(guess);
 
       assert.deepStrictEqual(guessResult, {
         R: 0,
         W: 1,
+        attempt: 1,
         isGameOver: false,
         hasWon: false,
       });
@@ -103,25 +104,28 @@ describe("MasterMind", () => {
 
     it("should give R count as 5 when the guess is correct", () => {
       const masterMind = new MasterMind("RGBYW", 5);
-      const guessColorCombination = "RGBYW";
-      const guessResult = masterMind.validateGuess(guessColorCombination);
+      const guess = "RGBYW";
+      const guessResult = masterMind.validateGuess(guess);
 
       assert.deepStrictEqual(guessResult, {
         R: 5,
         W: 0,
+        attempt: 1,
         isGameOver: true,
         hasWon: true,
+        secretCombination: "RGBYW",
       });
     });
 
     it("should mark the colors matched in same position first", () => {
       const masterMind = new MasterMind("RGBYW", 5);
-      const guessColorCombination = "GGGGG";
-      const guessResult = masterMind.validateGuess(guessColorCombination);
+      const guess = "GGGGG";
+      const guessResult = masterMind.validateGuess(guess);
 
       assert.deepStrictEqual(guessResult, {
         R: 1,
         W: 0,
+        attempt: 1,
         isGameOver: false,
         hasWon: false,
       });
@@ -129,11 +133,12 @@ describe("MasterMind", () => {
 
     it("should give the game over stats, if the attempts left is 0", () => {
       const masterMind = new MasterMind("RGBYW", 1);
-      const guessColorCombination = "GGGGG";
-      masterMind.validateGuess(guessColorCombination);
-      const guessResult = masterMind.validateGuess(guessColorCombination);
+      const guess = "GGGGG";
+      masterMind.validateGuess(guess);
+      const guessResult = masterMind.validateGuess(guess);
 
       assert.deepStrictEqual(guessResult, {
+        secretCombination: "RGBYW",
         isGameOver: true,
         hasWon: false,
       });

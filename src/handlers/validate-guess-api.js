@@ -18,23 +18,30 @@ const sendBadRequest = res => {
   res.status(400).end("Game is over (or) not exists");
 };
 
-const handleValidateGuess = (req, res) => {
+const extractReqDetails = req => {
   const player = req.cookies.name;
   const games = req.app.games;
   const game = games[player];
   const guess = req.body.guess;
+
+  return { player, games, game, guess };
+};
+
+const handleValidateGuess = (req, res) => {
+  const { player, game, games, guess } = extractReqDetails(req);
 
   if (!game || game.isGameOver()) return sendBadRequest(res);
   if (!guess || typeof guess !== "string") return sendInvalidData(res);
 
   const isValidGuess = isValidColorCombination(guess);
   if (!isValidGuess) return sendInvalidData(res);
-
   const result = game.validateGuess(guess);
+
   if (result.isGameOver) {
     games[player] = undefined;
     req.app.masterMindDB.addGameStats(player, game.gameStats());
   }
+
   res.send(result);
 };
 

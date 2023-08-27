@@ -21,6 +21,7 @@ describe("POST /game/validate-guess", () => {
       .expect({
         R: 2,
         W: 2,
+        attempt: 1,
         isGameOver: false,
         hasWon: false,
       })

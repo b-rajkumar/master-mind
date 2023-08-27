@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+header {
+  padding: 1em;
+  border-bottom: 2px solid black;
+  margin-bottom: 1em;
+}
+
+main {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.box {
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+}
+
+.row {
+  display: flex;
+  border: 1px solid black;
+  width: fit-content;
+}
+
+#board {
+  display: flex;
+  gap: 1em;
+  background-color: lightgray;
+  padding: 1em;
+}
+
+.heading {
+  font-size: 1.2em;
+  font-weight: 500;
+  text-align: center;
+  padding-bottom: 0.25em;
+}
+
+#input-controls {
+  margin: 1em;
+}
+
+#submit-btn,
+#input-box {
+  font-size: inherit;
+  padding: 0.3em;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.white {
+  background-color: white;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.brown {
+  background-color: brown;
+}
+
+#result-box {
+  font-size: 1.5em;
+  padding-top: 1em;
+  font-weight: 500;
+  text-align: center;
+}

@@ -45,7 +45,7 @@ describe("GET /game/start", () => {
         attemptsLeft: 9,
         guesses: [
           {
-            guessColorCombination: "RGWBE",
+            guess: "RGWBE",
             result: { R: 2, W: 2 },
           },
         ],

@@ -9,12 +9,16 @@ const { serveGamePage } = require("./handlers/game-page-api");
 const { handleGameStart } = require("./handlers/game-start-api");
 const { handleValidateGuess } = require("./handlers/validate-guess-api");
 
-const setupApp = app => {
+const setupMiddleWares = app => {
   app.use(logRequest);
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(parseCookies);
   app.use(isUserPresent);
+};
+
+const setupApp = app => {
+  setupMiddleWares(app);
   app.get("/", serveHomePage);
   app.get("/login", serveLoginPage);
   app.post("/login", registerUser);

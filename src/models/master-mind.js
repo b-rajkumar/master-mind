@@ -2,7 +2,7 @@ class MasterMind {
   #hasWon;
   #guesses;
   #isGameOver;
-  #attemptsLeft;
+  #currentAttempt;
   #numberOfAttempts;
   #secretColorCombination;
 
@@ -10,14 +10,14 @@ class MasterMind {
     this.#guesses = [];
     this.#hasWon = false;
     this.#isGameOver = false;
-    this.#attemptsLeft = numberOfAttempts;
+    this.#currentAttempt = 0;
     this.#numberOfAttempts = numberOfAttempts;
     this.#secretColorCombination = secretColorCombination;
   }
 
   #getGuesses() {
-    return this.#guesses.map(({ guessColorCombination, result }) => {
-      return { guessColorCombination, result };
+    return this.#guesses.map(({ guess, result }) => {
+      return { guess, result };
     });
   }
 
@@ -27,7 +27,8 @@ class MasterMind {
     });
   }
 
-  #analyseGuessColorCombination(colorCombination) {
+  #analyseGuess(guess) {
+    const colorCombination = guess.toUpperCase();
     const result = { R: 0, W: 0 };
     const secretColorCombination = this.#extractColorDetails(
       this.#secretColorCombination
@@ -52,26 +53,46 @@ class MasterMind {
     return result;
   }
 
-  validateGuess(guessColorCombination) {
+  #generateGameOverResult() {
+    return {
+      hasWon: this.#hasWon,
+      isGameOver: this.#isGameOver,
+      secretCombination: this.#secretColorCombination,
+    };
+  }
+
+  #generateGuessResult(R, W) {
+    const result = {
+      R,
+      W,
+      hasWon: this.#hasWon,
+      isGameOver: this.#isGameOver,
+      attempt: this.#currentAttempt,
+    };
     if (this.#isGameOver)
-      return {
-        hasWon: this.#hasWon,
-        isGameOver: this.#isGameOver,
-      };
+      result.secretCombination = this.#secretColorCombination;
 
-    this.#attemptsLeft -= 1;
-    if (this.#attemptsLeft === 0) this.#isGameOver = true;
+    return result;
+  }
 
-    const colorCombination = guessColorCombination.toUpperCase();
-    const result = this.#analyseGuessColorCombination(colorCombination);
+  validateGuess(guess) {
+    if (this.#isGameOver) return this.#generateGameOverResult();
 
-    if (result.R === 5) {
+    this.#currentAttempt += 1;
+    const { R, W } = this.#analyseGuess(guess);
+
+    if (this.#currentAttempt === this.#numberOfAttempts)
+      this.#isGameOver = true;
+
+    if (R === 5) {
       this.#hasWon = true;
       this.#isGameOver = true;
     }
-    this.#guesses.push({ guessColorCombination, result });
 
-    return { ...result, hasWon: this.#hasWon, isGameOver: this.#isGameOver };
+    this.#guesses.push({ guess, result: { R, W } });
+    const result = this.#generateGuessResult(R, W);
+
+    return result;
   }
 
   gameStats() {
@@ -79,7 +100,7 @@ class MasterMind {
       isGameOver: this.#isGameOver,
       hasWon: this.#hasWon,
       numberOfAttempts: this.#numberOfAttempts,
-      attemptsLeft: this.#attemptsLeft,
+      attemptsLeft: this.#numberOfAttempts - this.#currentAttempt,
       guesses: this.#getGuesses(),
     };
 

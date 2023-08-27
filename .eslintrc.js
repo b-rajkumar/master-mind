@@ -16,7 +16,7 @@ module.exports = {
     "use-isnan": "error",
     "valid-typeof": "error",
     camelcase: "warn",
-    complexity: ["warn", 3],
+    complexity: ["warn", 10],
     "default-param-last": "error",
     "dot-notation": "warn",
     eqeqeq: "warn",
