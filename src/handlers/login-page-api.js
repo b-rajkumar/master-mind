@@ -24,7 +24,7 @@ const logInUser = (req, res) => {
       .redirect("/");
   }
 
-  res.status(400).end("User login credentials not found");
+  res.status(400).send({ message: "User login credentials not found" });
 };
 
 module.exports = { serveLoginPage, logInUser };

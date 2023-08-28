@@ -17,7 +17,7 @@ const registerUser = (req, res) => {
   if (!(name && password)) {
     return res
       .status(400)
-      .end("The name and password must be passed in json format");
+      .send({ message: "The name and password must be passed in json format" });
   }
 
   const userDetails = getUserDetails(name, req);
@@ -26,6 +26,6 @@ const registerUser = (req, res) => {
     return res.redirect("/login");
   }
 
-  res.status(400).end("User already registered");
+  return res.status(400).send({ message: "Username already taken" });
 };
 module.exports = { serveRegisterPage, registerUser };

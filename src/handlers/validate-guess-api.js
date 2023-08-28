@@ -8,14 +8,15 @@ const isValidColorCombination = colorCombination => {
 };
 
 const sendInvalidData = res => {
-  res.status(400).end(
-    // eslint-disable-next-line max-len
-    "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body"
-  );
+  res.status(400).send({
+    message:
+      // eslint-disable-next-line max-len
+      "Expected '{guess: colorCombination}' in json format and should only contain colors 'RGBWYOPN' as Request body",
+  });
 };
 
 const sendBadRequest = res => {
-  res.status(400).end("Game is over (or) not exists");
+  res.status(400).send({ message: "Game is over (or) not exists" });
 };
 
 const extractReqDetails = req => {
