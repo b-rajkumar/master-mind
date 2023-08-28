@@ -7,15 +7,20 @@
 
 <body>
   <header>
-    <h1>Login</h1>
+    <h1>Master Mind</h1>
   </header>
   <main>
-    <form action="/login" method="post">
-      <label>Username:
-        <input type="text" name="name" required />
-      </label>
-      <input type="submit">
-    </form>
+    <div id="page">
+      <form action="/login" method="post">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="text" name="password" placeholder="Password" required />
+        <div id="login-error" class="hide">Invalid credentials</div>
+        <input type="submit" value="Log in">
+        <div id="register-container">
+          <input type="button" value="Sign up" id="register-btn" required>
+        </div>
+      </form>
+    </div>
   </main>
 
 </body>
