@@ -4,25 +4,32 @@ const MasterMindDB = require("../../src/models/master-mind-db");
 
 describe("masterMindDB", () => {
   it("should add the user to the database", (context, done) => {
-    const users = ["raj", "krishna"];
+    const users = [{ name: "raj", password: "kumar", token: "1" }];
+    const expectedUserData = [
+      { name: "raj", password: "kumar", token: "1" },
+      { name: "bittu", password: "thakur", token: "2" },
+    ];
     const playersStats = {};
     const writeFile = context.mock.fn((path, data) => {
       done();
       assert.strictEqual(path, "./data/users.json");
-      assert.strictEqual(data, '["raj","krishna","bittu"]');
+      assert.strictEqual(data, JSON.stringify(expectedUserData));
     });
 
     const masterMindDB = new MasterMindDB(users, playersStats, writeFile);
-    masterMindDB.registerUser("bittu");
+    masterMindDB.registerUser("bittu", "thakur");
   });
 
   it("should give the users", () => {
-    const users = ["raj", "krishna"];
+    const users = [{ name: "raj", password: "kumar", token: "1" }];
     const playersStats = {};
     const masterMindDB = new MasterMindDB(users, playersStats, () => {});
-    masterMindDB.registerUser("bittu");
+    masterMindDB.registerUser("bittu", "thakur");
 
-    assert.deepStrictEqual(masterMindDB.getUsers(), [...users, "bittu"]);
+    assert.deepStrictEqual(masterMindDB.getUsers(), [
+      { name: "raj", password: "kumar", token: "1" },
+      { name: "bittu", password: "thakur", token: "2" },
+    ]);
   });
 
   describe("getPlayerStats", () => {

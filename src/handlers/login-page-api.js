@@ -1,21 +1,30 @@
-const serveLoginPage = (req, res) => {
-  res.sendFile(`${process.env.PWD}/resources/pages/login-page.html`);
+const serveLoginPage = (_, res) => {
+  res.sendFile(`${process.env.PWD}/private/login-page.html`);
 };
 
-const registerUser = (req, res) => {
+const getUserDetails = (name, password, req) => {
   const masterMindDB = req.app.masterMindDB;
   const users = masterMindDB.getUsers();
-  const username = req.body.name;
+  const userDetails = users.find(user => {
+    return user.name === name && user.password === password;
+  });
 
-  if (username) {
-    if (!users.includes(username)) masterMindDB.registerUser(username);
-
-    return res.cookie("name", username).redirect("/");
-  }
-
-  res
-    .status(400)
-    .end("Expected 'name=username' in urlencoded format as Request body");
+  return userDetails;
 };
 
-module.exports = { serveLoginPage, registerUser };
+const logInUser = (req, res) => {
+  const name = req.body.name;
+  const password = req.body.password;
+  const userDetails = getUserDetails(name, password, req);
+
+  if (userDetails) {
+    return res
+      .cookie("token", userDetails.token)
+      .cookie("name", name)
+      .redirect("/");
+  }
+
+  res.status(400).end("User login credentials not found");
+};
+
+module.exports = { serveLoginPage, logInUser };

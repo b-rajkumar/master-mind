@@ -8,7 +8,11 @@ const MasterMindDB = require("../../src/models/master-mind-db");
 describe("isUserPresent", () => {
   // eslint-disable-next-line max-len
   it("should redirect to the login page, when the user details are not provided", (_, done) => {
-    const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
+    const masterMindDB = new MasterMindDB(
+      [{ name: "raj", token: "1", password: "kumar" }],
+      {},
+      () => {}
+    );
     const app = createApp(masterMindDB);
 
     request(app).get("/").expect(302).expect("location", "/login").end(done);

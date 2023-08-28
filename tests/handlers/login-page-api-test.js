@@ -18,26 +18,18 @@ describe("GET /login", () => {
 
 describe("POST /login", () => {
   describe("Redirect to Home", () => {
-    it("should redirect if the user already exists", (_, done) => {
-      const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
+    it("should redirect if the user details are valid", (_, done) => {
+      const masterMindDB = new MasterMindDB(
+        [{ name: "raj", password: "kumar", token: "1" }],
+        {},
+        () => {}
+      );
       const app = createApp(masterMindDB);
 
       request(app)
         .post("/login")
-        .send("name=raj")
-        .expect(302)
-        .expect("Location", "/")
-        .end(done);
-    });
-
-    // eslint-disable-next-line max-len
-    it("should redirect after registering the user, when the user didn't exists before", (_, done) => {
-      const masterMindDB = new MasterMindDB([], {}, () => {});
-      const app = createApp(masterMindDB);
-
-      request(app)
-        .post("/login")
-        .send("name=raj")
+        .set("content-type", "application/json")
+        .send({ name: "raj", password: "kumar" })
         .expect(302)
         .expect("Location", "/")
         .end(done);
@@ -46,13 +38,13 @@ describe("POST /login", () => {
 
   // eslint-disable-next-line max-len
   it("should respond with Bad Request, if the user details are not provided", (_, done) => {
-    const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
+    const masterMindDB = new MasterMindDB(
+      [{ name: "raj", password: "kumar", token: "1" }],
+      {},
+      () => {}
+    );
     const app = createApp(masterMindDB);
 
-    request(app)
-      .post("/login")
-      .expect(400)
-      .expect("Expected 'name=username' in urlencoded format as Request body")
-      .end(done);
+    request(app).post("/login").expect(400).end(done);
   });
 });

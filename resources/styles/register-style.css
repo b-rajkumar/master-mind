@@ -1,3 +1,7 @@
+:root {
+  --action-color: #1a76f3;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -37,17 +41,11 @@ main {
 
 form {
   display: grid;
+  margin-top: 2em;
   gap: 0.75em;
   padding: 1.5em;
-  box-shadow: 0 0 2px black;
+  box-shadow: 0 0 3px black;
   border-radius: 5px;
-}
-
-input[type="submit"] {
-  font-size: 1em;
-  padding: 0.5em;
-  font-weight: 400;
-  cursor: pointer;
 }
 
 form input[name="name"],
@@ -59,17 +57,21 @@ input[name="password"] {
 }
 
 #register-container {
-  display: flex;
-  justify-content: center;
-  gap: 0.5em;
-  border-top: 3px solid #aaaaaa;
-  margin-top: 0.5em;
-  padding-top: 1em;
+  font-size: 0.8em;
 }
 
-#login-error {
-  font-size: 0.7em;
+#register-btn {
+  font-size: 1em;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.red {
   color: red;
+}
+
+.green {
+  color: green;
 }
 
 .hide {
