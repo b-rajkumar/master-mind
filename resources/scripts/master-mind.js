@@ -1,12 +1,12 @@
 const colorMapping = {
-  R: "#e80000",
-  G: "#00b600",
-  B: "#0059d7",
+  R: "#b30000",
+  G: "#009900",
+  B: "#0055cc",
   W: "#dddddd",
-  O: "#ed7400",
-  P: "#ba0bff",
-  Y: "#ffdd00",
-  N: "#814216",
+  O: "#cc6300",
+  P: "#9200cc",
+  Y: "#cbb100",
+  N: "#994f1a",
 };
 
 const generateCircle = (color, radius) => {
@@ -85,17 +85,20 @@ const submitResult = guess => {
     );
 };
 
-const setupSubmitButton = () => {
-  const submitButton = document.querySelector("#submit-btn");
-  const inputBox = document.querySelector("#input-box");
+const setupInput = () => {
+  const inputTextBox = document.querySelector("#input-box");
+  inputTextBox.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      const guess = inputTextBox.value.toUpperCase();
+      const validInputPattern = /[RGBWYOPN]{5}/;
 
-  submitButton.onclick = () => {
-    const guess = inputBox.value;
-    if (guess.length !== 5) return;
-
-    submitResult(guess.toUpperCase());
-    inputBox.value = "";
-  };
+      if (validInputPattern.test(guess)) {
+        inputTextBox.value = "";
+        inputTextBox.focus();
+        submitResult(guess);
+      }
+    }
+  });
 };
 
 const startGame = () => {
@@ -192,7 +195,7 @@ const main = () => {
   renderBoard();
   startGame();
   displayPlayername();
-  setupSubmitButton();
+  setupInput();
 };
 
 window.onload = main;

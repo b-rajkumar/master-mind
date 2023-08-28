@@ -12,24 +12,18 @@
     <p id="username"></p>
   </header>
   <main>
-    <section id="game-rules">
-      R ➡ 🔴 | G ➡ 🟢 | B ➡ 🔵 | W ➡ ⚪️ | Y ➡ 🟡 | O ➡ 🟠 | P ➡ 🟣 | N ➡ 🟤
-    </section>
     <section id="game">
       <div id="input-controls">
-        <input type="text" name="guess" id="input-box" placeholder="Enter your guess">
-        <input type="button" value="submit" id="submit-btn">
+        <input type="text" name="guess" id="input-box" placeholder="Enter your guess" maxlength="5">
       </div>
 
       <div id="board">
         <div id="attempts"></div>
-
         <div id="result"></div>
       </div>
-
-      <div id="result-box"></div>
+    </section>
+    <div id="result-box"></div>
   </main>
-  </section>
 </body>
 
 </html>
