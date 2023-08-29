@@ -10,12 +10,28 @@ body {
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  gap: 1em;
   padding: 1em;
+  grid-template-columns: 1fr 1fr;
   margin-bottom: 1em;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
+  color: #444444;
+  border-bottom: 3px solid #aaaaaa;
+}
+
+#login-controls {
+  justify-self: right;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+#logout-btn {
+  font-size: 0.8em;
+  padding: 0.5em;
+  font-weight: 400;
+  cursor: pointer;
 }
 
 main {

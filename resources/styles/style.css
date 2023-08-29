@@ -18,10 +18,6 @@ header {
   border-bottom: 3px solid #aaaaaa;
 }
 
-main {
-  margin: 1em;
-}
-
 #login-controls {
   justify-self: right;
   display: flex;
@@ -35,4 +31,8 @@ main {
   padding: 0.5em;
   font-weight: 400;
   cursor: pointer;
+}
+
+main {
+  margin: 1em;
 }

@@ -113,10 +113,24 @@ const startGame = () => {
     });
 };
 
-const displayPlayername = () => {
-  const usernameContainer = document.querySelector("#username");
+const sendLogoutReq = () => {
+  fetch("/logout", { method: "POST" }).then(res => {
+    if (res.ok) window.location.assign("/login");
+  });
+};
+
+const displayLogoutControls = name => {
+  const loginControlsContainer = document.querySelector("#login-controls");
+  const logoutButton = document.querySelector("#logout-btn");
+  logoutButton.onclick = sendLogoutReq;
+  const displayName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+  loginControlsContainer.prepend(displayName);
+};
+
+const displayLoginInfo = () => {
   const cookies = extractCookies(document.cookie);
-  usernameContainer.innerText = cookies.name;
+  const name = cookies.name;
+  if (name) displayLogoutControls(name);
 };
 
 const generateBoxElement = (boxType, radius) => {
@@ -194,7 +208,7 @@ const renderBoard = () => {
 const main = () => {
   renderBoard();
   startGame();
-  displayPlayername();
+  displayLoginInfo();
   setupInput();
 };
 

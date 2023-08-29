@@ -22,7 +22,8 @@ const displayLogoutControls = name => {
   const loginControlsContainer = document.querySelector("#login-controls");
   const logoutButton = document.querySelector("#logout-btn");
   logoutButton.onclick = sendLogoutReq;
-  loginControlsContainer.prepend(`Welcome ${name}`);
+  const displayName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+  loginControlsContainer.prepend(`Welcome ${displayName}`);
 };
 
 const displayLoginInfo = () => {
