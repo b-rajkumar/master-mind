@@ -1,3 +1,8 @@
+:root {
+  --dark-color: rgb(58, 58, 58);
+  --light-color: rgb(221, 221, 221);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,8 +22,8 @@ header {
   grid-template-columns: 1fr 1fr;
   margin-bottom: 1em;
   border-bottom: 1px solid black;
-  background-color: rgb(58, 58, 58);
-  color: rgb(221, 221, 221);
+  background-color: var(--dark-color);
+  color: var(--light-color);
 }
 
 #login-controls {
@@ -30,9 +35,13 @@ header {
 
 #logout-btn {
   font-size: 0.8em;
-  padding: 0.3em;
+  padding: 0.4em;
   font-weight: 400;
   cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: var(--dark-color);
+  background-color: var(--light-color);
 }
 
 #page {
