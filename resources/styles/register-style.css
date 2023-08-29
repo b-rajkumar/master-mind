@@ -24,8 +24,8 @@ header {
   align-items: center;
   justify-content: center;
   gap: 1em;
-  color: #444444;
-  border-bottom: 3px solid #aaaaaa;
+  background-color: rgb(58, 58, 58);
+  color: rgb(221, 221, 221);
 }
 
 main {

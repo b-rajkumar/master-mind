@@ -17,8 +17,8 @@ header {
   grid-template-columns: 1fr 1fr;
   margin-bottom: 1em;
   border-bottom: 1px solid black;
-  color: #444444;
-  border-bottom: 3px solid #aaaaaa;
+  background-color: rgb(58, 58, 58);
+  color: rgb(221, 221, 221);
 }
 
 #login-controls {
