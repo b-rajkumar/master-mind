@@ -14,6 +14,23 @@ describe("GET /register", () => {
       .expect("content-type", "text/html; charset=UTF-8")
       .end(done);
   });
+
+  // eslint-disable-next-line max-len
+  it("should redirect to home page if the user details are present", (_, done) => {
+    const masterMindDB = new MasterMindDB(
+      [{ name: "raj", password: "kumar", token: "1" }],
+      {},
+      () => {}
+    );
+    const app = createApp(masterMindDB);
+
+    request(app)
+      .get("/register")
+      .set("Cookie", ["name=raj; token=1"])
+      .expect(302)
+      .expect("Location", "/")
+      .end(done);
+  });
 });
 
 describe("POST /register", () => {
@@ -26,7 +43,7 @@ describe("POST /register", () => {
       .set("content-type", "application/json")
       .send({ name: "bittu", password: "thakur" })
       .expect(302)
-      .expect("Location", "/login")
+      .expect("Location", "/")
       .end(done);
   });
 

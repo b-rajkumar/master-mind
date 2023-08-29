@@ -9,23 +9,30 @@ body {
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  gap: 1em;
   padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid black;
+  color: #444444;
+  border-bottom: 3px solid #aaaaaa;
 }
 
 main {
   margin: 1em;
 }
 
+#login-controls {
+  justify-self: right;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+#logout-btn,
 #start-btn {
-  font-size: 1em;
-  padding: 0.3em;
-  background-color: transparent;
-  border: 1px solid grey;
-  box-shadow: 1px 1px 0px black;
-  border-radius: 5px;
+  font-size: 0.8em;
+  padding: 0.5em;
+  font-weight: 400;
+  cursor: pointer;
 }

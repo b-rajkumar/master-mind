@@ -26,7 +26,11 @@ describe("GET /player-stats", () => {
       },
     };
 
-    const masterMindDB = new MasterMindDB(["raj"], playerStats, () => {});
+    const masterMindDB = new MasterMindDB(
+      [{ name: "raj", password: "kumar", token: "1" }],
+      playerStats,
+      () => {}
+    );
     const app = createApp(masterMindDB);
     const stats = {
       games: [
@@ -48,7 +52,7 @@ describe("GET /player-stats", () => {
 
     request(app)
       .get("/player-stats")
-      .set("Cookie", ["name=raj"])
+      .set("Cookie", ["name=raj; token=1"])
       .expect(200)
       .expect("content-type", "application/json; charset=utf-8")
       .expect(stats)

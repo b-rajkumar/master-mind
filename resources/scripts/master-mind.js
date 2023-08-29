@@ -3,7 +3,7 @@ const colorMapping = {
   G: "#009900",
   B: "#0055cc",
   W: "#dddddd",
-  O: "#cc6300",
+  O: "#e66f00",
   P: "#9200cc",
   Y: "#cbb100",
   N: "#994f1a",

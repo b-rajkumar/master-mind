@@ -1,4 +1,18 @@
-const serveRegisterPage = (_, res) => {
+const isUserPresent = req => {
+  const users = req.app.masterMindDB.getUsers();
+  const name = req.cookies.name;
+  const token = req.cookies.token;
+
+  const userDetails = users.find(user => {
+    return user.token === token && user.name === name;
+  });
+
+  return userDetails;
+};
+
+const serveRegisterPage = (req, res) => {
+  if (isUserPresent(req)) return res.redirect(302, "/");
+
   res.sendFile(`${process.env.PWD}/private/register-page.html`);
 };
 
@@ -21,9 +35,10 @@ const registerUser = (req, res) => {
   }
 
   const userDetails = getUserDetails(name, req);
+
   if (!userDetails) {
-    req.app.masterMindDB.registerUser(name, password);
-    return res.redirect("/login");
+    const token = req.app.masterMindDB.registerUser(name, password);
+    return res.cookie("token", token).cookie("name", name).redirect("/");
   }
 
   return res.status(400).send({ message: "Username already taken" });

@@ -19,8 +19,16 @@ describe("isUserPresent", () => {
   });
 
   it("should call the next if the user is present", context => {
-    const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
-    const req = { cookies: { name: "raj" }, app: { masterMindDB }, url: "/" };
+    const masterMindDB = new MasterMindDB(
+      [{ name: "raj", token: "1", password: "kumar" }],
+      {},
+      () => {}
+    );
+    const req = {
+      cookies: { name: "raj", token: "1" },
+      app: { masterMindDB },
+      url: "/",
+    };
     const res = {};
     const next = context.mock.fn();
     isUserPresent(req, res, next);

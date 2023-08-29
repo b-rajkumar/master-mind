@@ -3,7 +3,11 @@ const { isUserPresent } = require("./middlewares/authenticate");
 const { parseCookies } = require("./middlewares/cookie-parser");
 const { logRequest } = require("./middlewares/logger");
 const { serveHomePage } = require("./handlers/home-page-api");
-const { serveLoginPage, logInUser } = require("./handlers/login-page-api");
+const {
+  serveLoginPage,
+  logInUser,
+  logOutUser,
+} = require("./handlers/login-page-api");
 const { handlePlayerStats } = require("./handlers/player-stats-api-test");
 const { serveGamePage } = require("./handlers/game-page-api");
 const { handleGameStart } = require("./handlers/game-start-api");
@@ -20,16 +24,17 @@ const setupMiddleWares = app => {
   app.use(express.json());
 };
 
-const setupLoginAndRegisterApi = app => {
+const setupLoginControls = app => {
   app.get("/login", serveLoginPage);
   app.post("/login", logInUser);
   app.post("/register", registerUser);
   app.get("/register", serveRegisterPage);
+  app.post("/logout", logOutUser);
 };
 
 const setupApp = app => {
   setupMiddleWares(app);
-  setupLoginAndRegisterApi(app);
+  setupLoginControls(app);
   app.use(express.static("./resources"));
   app.use(isUserPresent);
   app.get("/", serveHomePage);

@@ -7,7 +7,11 @@ const MasterMind = require("../../src/models/master-mind");
 describe("POST /game/validate-guess", () => {
   // eslint-disable-next-line max-len
   it("should give the result of the guess", (_, done) => {
-    const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
+    const masterMindDB = new MasterMindDB(
+      [{ name: "raj", password: "kumar", token: "1" }],
+      {},
+      () => {}
+    );
     const game = new MasterMind("RGBWY");
     const app = createApp(masterMindDB);
     app.games.raj = game;
@@ -15,7 +19,7 @@ describe("POST /game/validate-guess", () => {
     request(app)
       .post("/game/validate-guess")
       .send({ guess: "RGWBO" })
-      .set("Cookie", "name=raj")
+      .set("Cookie", ["name=raj; token=1"])
       .expect(200)
       .expect("content-type", "application/json; charset=utf-8")
       .expect({
@@ -31,14 +35,18 @@ describe("POST /game/validate-guess", () => {
   describe("Invalid request", () => {
     // eslint-disable-next-line max-len
     it("should respond with error if the guess details are not provided", (_, done) => {
-      const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
+      const masterMindDB = new MasterMindDB(
+        [{ name: "raj", password: "kumar", token: "1" }],
+        {},
+        () => {}
+      );
       const game = new MasterMind("RGBWY");
       const app = createApp(masterMindDB);
       app.games.raj = game;
 
       request(app)
         .post("/game/validate-guess")
-        .set("Cookie", "name=raj")
+        .set("Cookie", ["name=raj; token=1"])
         .expect(400)
         .expect({
           message:
@@ -50,7 +58,11 @@ describe("POST /game/validate-guess", () => {
 
     // eslint-disable-next-line max-len
     it("should respond with error if the guess colors are not in the given color set", (_, done) => {
-      const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
+      const masterMindDB = new MasterMindDB(
+        [{ name: "raj", password: "kumar", token: "1" }],
+        {},
+        () => {}
+      );
       const game = new MasterMind("RGBWY");
       const app = createApp(masterMindDB);
       app.games.raj = game;
@@ -58,7 +70,7 @@ describe("POST /game/validate-guess", () => {
       request(app)
         .post("/game/validate-guess")
         .send({ guess: "ABCDE" })
-        .set("Cookie", "name=raj")
+        .set("Cookie", ["name=raj; token=1"])
         .expect(400)
         .expect({
           message:
@@ -71,13 +83,17 @@ describe("POST /game/validate-guess", () => {
 
   describe("Bad Request", () => {
     it("should respond with error if the game is not started", (_, done) => {
-      const masterMindDB = new MasterMindDB(["raj"], {}, () => {});
+      const masterMindDB = new MasterMindDB(
+        [{ name: "raj", password: "kumar", token: "1" }],
+        {},
+        () => {}
+      );
       const app = createApp(masterMindDB);
 
       request(app)
         .post("/game/validate-guess")
         .send({ guess: "RGBYW" })
-        .set("Cookie", "name=raj")
+        .set("Cookie", ["name=raj; token=1"])
         .expect(400)
         .expect({ message: "Game is over (or) not exists" })
         .end(done);

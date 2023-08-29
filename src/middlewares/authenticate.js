@@ -1,13 +1,13 @@
-const getUserDetails = (token, req) => {
-  const users = req.app.masterMindDB.getUsers();
-  const userDetails = users.find(user => user.token === token);
-
-  return userDetails;
-};
-
 const isUserPresent = (req, res, next) => {
-  const userDetails = getUserDetails(req.cookies.token, req);
-  if (userDetails) return next();
+  const users = req.app.masterMindDB.getUsers();
+  const name = req.cookies.name;
+  const token = req.cookies.token;
+
+  const userDetails = users.find(user => {
+    return user.token === token && user.name === name;
+  });
+
+  if (userDetails && name && token) return next();
 
   res.redirect(302, "/login");
 };

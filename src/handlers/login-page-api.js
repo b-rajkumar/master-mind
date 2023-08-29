@@ -1,4 +1,18 @@
-const serveLoginPage = (_, res) => {
+const isUserPresent = req => {
+  const users = req.app.masterMindDB.getUsers();
+  const name = req.cookies.name;
+  const token = req.cookies.token;
+
+  const userDetails = users.find(user => {
+    return user.token === token && user.name === name;
+  });
+
+  return userDetails;
+};
+
+const serveLoginPage = (req, res) => {
+  if (isUserPresent(req)) return res.redirect(302, "/");
+
   res.sendFile(`${process.env.PWD}/private/login-page.html`);
 };
 
@@ -27,4 +41,14 @@ const logInUser = (req, res) => {
   res.status(400).send({ message: "User login credentials not found" });
 };
 
-module.exports = { serveLoginPage, logInUser };
+const logOutUser = (req, res) => {
+  const name = req.cookies.name;
+  const token = req.cookies.token;
+
+  return res
+    .clearCookie("token", token)
+    .clearCookie("name", name)
+    .redirect("/login");
+};
+
+module.exports = { serveLoginPage, logInUser, logOutUser };

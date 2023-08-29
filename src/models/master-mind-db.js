@@ -17,6 +17,8 @@ class MasterMindDB {
     const token = this.#users.length + 1;
     this.#users.push({ name, password, token: token.toString() });
     this.#writeFile("./data/users.json", JSON.stringify(this.#users), () => {});
+
+    return token;
   }
 
   #updateDataBase() {
