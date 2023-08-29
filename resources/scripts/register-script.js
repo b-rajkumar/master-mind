@@ -1,6 +1,5 @@
 const handleResponse = res => {
   const registerContainer = document.querySelector("#register-container");
-  registerContainer.classList.remove("hide");
 
   if (res.ok) {
     registerContainer.innerText = "Registered Successfully";

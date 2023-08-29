@@ -1,6 +1,6 @@
 const showInvalidCredentials = () => {
   const loginErrorBox = document.querySelector("#login-error");
-  loginErrorBox.classList.toggle("hide");
+  loginErrorBox.innerText = "Invalid credentials";
 };
 
 const handleResponse = res => {
