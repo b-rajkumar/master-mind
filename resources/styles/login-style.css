@@ -75,6 +75,10 @@ input[name="password"] {
   padding-top: 1em;
 }
 
+#login-container {
+  font-size: 0.8em;
+}
+
 #login-error {
   font-size: 0.7em;
   color: red;

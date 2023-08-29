@@ -70,6 +70,15 @@ input[name="password"] {
   background-color: var(--dark-color);
 }
 
+#login-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  border-top: 3px solid #aaaaaa;
+  margin-top: 0.5em;
+  padding-top: 1em;
+}
+
 .red {
   color: red;
 }
