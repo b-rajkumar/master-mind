@@ -14,17 +14,48 @@
     </div>
   </header>
   <main>
-    <section id="game">
-      <div id="board">
-        <div id="attempts"></div>
-        <div id="result"></div>
-      </div>
+    <div id="page">
+      <section id="game">
+        <div id="board">
+          <div id="attempts"></div>
+          <div id="result"></div>
+        </div>
 
-      <div id="input-controls">
-        <input type="text" name="guess" id="input-box" placeholder="Enter your guess" maxlength="5">
+        <div id="input-controls">
+          <input type="text" name="guess" id="input-box" placeholder="Enter your guess" maxlength="5">
+        </div>
+        <div id="result-box"></div>
+      </section>
+
+      <div id="help">ℹ️
+        <input type="button" id="help-btn">
       </div>
+    </div>
+
+
+    <section id="game-rules" class="hide">
+      <h2>Game Rules</h2>
+      <p>R ➡ 🔴 | G ➡ 🟢 | B ➡ 🔵 | W ➡ ⚪️ | Y ➡ 🟡 | O ➡ 🟠 | P ➡ 🟣 | N ➡ 🟤</p>
+      <br>
+      <p>The player has to choose 5 five colors from the above 8 colors to break
+        the secret color combination.
+      </p>
+      <p>For every guess you will get result of the guess as red and white pegs</p>
+      <p>The white peg indicates that is a correct color but wrong position, or a
+        red peg to indicate each peg is in a correct position and a right color.
+      <p> If neither are true, then no peg should
+        be
+        placed.
+      </p>
+      The pegs may place in any order in the peg holes arranged in the square pattern next to the line
+      of peg
+      holes holding the guess pegs being answered.
+      </p>
+
+      <p>The answer and guess pegs stay in their positions until the end of the game.</p>
+      <p>Play continues until the code is discovered or there are no remaining guesses.</p>
+
     </section>
-    <div id="result-box"></div>
   </main>
 </body>
 

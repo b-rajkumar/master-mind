@@ -205,11 +205,20 @@ const renderBoard = () => {
   renderRows(resultContainer, "small-box", 15);
 };
 
+const setupHelpButton = () => {
+  const helpButton = document.querySelector("#help-btn");
+  helpButton.onclick = () => {
+    const gameRulesContainer = document.querySelector("#game-rules");
+    gameRulesContainer.classList.toggle("hide");
+  };
+};
+
 const main = () => {
   renderBoard();
   startGame();
   displayLoginInfo();
   setupInput();
+  setupHelpButton();
 };
 
 window.onload = main;
