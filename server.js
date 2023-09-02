@@ -4,10 +4,10 @@ const { readFile, writeFile } = fs;
 const MasterMindDB = require("./src/models/master-mind-db");
 
 const setupDataBase = handler => {
-  readFile("./data/users.json", (e, usersData) => {
+  readFile("./data/users.json", (_, usersData) => {
     const users = JSON.parse(usersData);
 
-    readFile("./data/players-stats.json", (e, playersStatsData) => {
+    readFile("./data/players-stats.json", (_, playersStatsData) => {
       const playersStats = JSON.parse(playersStatsData);
       const masterMindDB = new MasterMindDB(users, playersStats, writeFile);
 
@@ -30,7 +30,7 @@ const createMasterMindDataBase = () => {
 
 const main = () => {
   createMasterMindDataBase();
-  const port = 9090;
+  const port = process.env.PORT || 9090;
   setupDataBase(masterMindDB => {
     const app = createApp(masterMindDB);
 
