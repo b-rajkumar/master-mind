@@ -26,15 +26,66 @@ const displayLogoutControls = name => {
   loginControlsContainer.prepend(`Welcome ${displayName}`);
 };
 
-const displayLoginInfo = () => {
+const displayTableRow = ({
+  id,
+  secretCombination,
+  numberOfAttempts,
+  attemptsLeft,
+  hasWon,
+}) => {
+  const attemptsTaken = numberOfAttempts - attemptsLeft;
+  const gameStatus = hasWon ? "won" : "lost";
+  const trElement = document.createElement("tr");
+
+  const rowTemplate = ` 
+          <td>${id}</td>
+          <td>${secretCombination}</td>
+          <td>${numberOfAttempts}</td>
+          <td>${attemptsTaken}</td>
+          <td>${gameStatus}</td>`;
+
+  trElement.innerHTML = rowTemplate;
+
+  return trElement;
+};
+
+const renderStats = tableData => {
+  const statsContainer = document.querySelector("#player-stats");
+  const rowElements = tableData.map((rowData, i) =>
+    displayTableRow({ ...rowData, id: i + 1 })
+  );
+  statsContainer.append(...rowElements);
+};
+
+const displayNoStatsMsg = () => {
+  const statsTable = document.querySelector("#player-stats-table");
+  statsTable.classList.add("hide");
+
+  const noStatsMsgContainer = document.querySelector("#player-stats-msg");
+  noStatsMsgContainer.classList.remove("hide");
+};
+
+const displayPlayerStats = name => {
+  fetch(`/player-stats/${name}`)
+    .then(res => res.json())
+    .then(({ games }) => {
+      if (games) return renderStats(games);
+
+      displayNoStatsMsg();
+    });
+};
+
+const displayPlayerDetails = () => {
   const cookies = extractCookies(document.cookie);
   const name = cookies.name;
   if (name) displayLogoutControls(name);
+
+  displayPlayerStats(name);
 };
 
 const main = () => {
-  displayLoginInfo();
   setupStartButton();
+  displayPlayerDetails();
 };
 
 window.onload = main;

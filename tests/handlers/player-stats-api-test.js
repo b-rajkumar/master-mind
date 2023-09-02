@@ -10,7 +10,7 @@ describe("GET /player-stats", () => {
       raj: {
         games: [
           {
-            secretColorCombination: "RGBYW",
+            secretCombination: "RGBYW",
             isGameOver: true,
             hasWon: false,
             numberOfAttempts: 1,
@@ -35,7 +35,7 @@ describe("GET /player-stats", () => {
     const stats = {
       games: [
         {
-          secretColorCombination: "RGBYW",
+          secretCombination: "RGBYW",
           isGameOver: true,
           hasWon: false,
           numberOfAttempts: 1,
@@ -51,7 +51,7 @@ describe("GET /player-stats", () => {
     };
 
     request(app)
-      .get("/player-stats")
+      .get("/player-stats/raj")
       .set("Cookie", ["name=raj; token=1"])
       .expect(200)
       .expect("content-type", "application/json; charset=utf-8")

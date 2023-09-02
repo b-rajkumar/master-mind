@@ -8,14 +8,35 @@
 
 <body>
   <header>
+    <div></div>
     <h1>Master Mind</h1>
     <div id="login-controls">
       <input type="button" value="Logout" id="logout-btn">
     </div>
   </header>
+
   <main>
     <input type="button" value="Start" id="start-btn">
-    <table id="player-stats"></table>
+    <section id="player-stats-container">
+      <h2 id="stats-heading"><u>Stats :</u></h2>
+
+      <table id="player-stats-table">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Secret combination</th>
+            <th>Number of attempts</th>
+            <th>Attempts taken</th>
+            <th>win/lose</th>
+          </tr>
+        </thead>
+
+        <tbody id="player-stats">
+        </tbody>
+      </table>
+
+      <div id="player-stats-msg" class="hide">No stats found</div>
+    </section>
   </main>
 
 </body>

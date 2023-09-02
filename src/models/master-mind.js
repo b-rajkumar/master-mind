@@ -4,15 +4,15 @@ class MasterMind {
   #isGameOver;
   #currentAttempt;
   #numberOfAttempts;
-  #secretColorCombination;
+  #secretCombination;
 
-  constructor(secretColorCombination, numberOfAttempts = 10) {
+  constructor(secretCombination, numberOfAttempts = 10) {
     this.#guesses = [];
     this.#hasWon = false;
     this.#isGameOver = false;
     this.#currentAttempt = 0;
     this.#numberOfAttempts = numberOfAttempts;
-    this.#secretColorCombination = secretColorCombination;
+    this.#secretCombination = secretCombination;
   }
 
   #getGuesses() {
@@ -30,11 +30,11 @@ class MasterMind {
   #analyseGuess(guess) {
     const colorCombination = guess.toUpperCase();
     const result = { R: 0, W: 0 };
-    const secretColorCombination = this.#extractColorDetails(
-      this.#secretColorCombination
+    const secretCombination = this.#extractColorDetails(
+      this.#secretCombination
     );
 
-    secretColorCombination.forEach((colorDetails, i) => {
+    secretCombination.forEach((colorDetails, i) => {
       const isColorMatched = colorDetails.color === colorCombination[i];
       if (isColorMatched) {
         result.R += 1;
@@ -42,7 +42,7 @@ class MasterMind {
       }
     });
 
-    secretColorCombination.forEach(colorDetails => {
+    secretCombination.forEach(colorDetails => {
       const isColorPresent = colorCombination.includes(colorDetails.color);
       if (!colorDetails.isMatched && isColorPresent) {
         result.W += 1;
@@ -57,7 +57,7 @@ class MasterMind {
     return {
       hasWon: this.#hasWon,
       isGameOver: this.#isGameOver,
-      secretCombination: this.#secretColorCombination,
+      secretCombination: this.#secretCombination,
     };
   }
 
@@ -69,8 +69,7 @@ class MasterMind {
       isGameOver: this.#isGameOver,
       attempt: this.#currentAttempt,
     };
-    if (this.#isGameOver)
-      result.secretCombination = this.#secretColorCombination;
+    if (this.#isGameOver) result.secretCombination = this.#secretCombination;
 
     return result;
   }
@@ -104,8 +103,7 @@ class MasterMind {
       guesses: this.#getGuesses(),
     };
 
-    if (this.#isGameOver)
-      stats.secretColorCombination = this.#secretColorCombination;
+    if (this.#isGameOver) stats.secretCombination = this.#secretCombination;
 
     return stats;
   }

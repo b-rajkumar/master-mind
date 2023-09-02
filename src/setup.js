@@ -38,7 +38,7 @@ const setupApp = app => {
   app.use(express.static("./resources"));
   app.use(isUserPresent);
   app.get("/", serveHomePage);
-  app.get("/player-stats", handlePlayerStats);
+  app.get("/player-stats/:player", handlePlayerStats);
   app.get("/game", serveGamePage);
   app.get("/game/start", handleGameStart);
   app.post("/game/validate-guess", handleValidateGuess);

@@ -39,7 +39,7 @@ describe("masterMindDB", () => {
         raj: {
           games: [
             {
-              secretColorCombination: "RGBYW",
+              secretCombination: "RGBYW",
               isGameOver: true,
               hasWon: false,
               numberOfAttempts: 1,
@@ -58,7 +58,7 @@ describe("masterMindDB", () => {
       const expectedStats = {
         games: [
           {
-            secretColorCombination: "RGBYW",
+            secretCombination: "RGBYW",
             isGameOver: true,
             hasWon: false,
             numberOfAttempts: 1,
@@ -78,13 +78,13 @@ describe("masterMindDB", () => {
     });
   });
 
-  it("should give the stats of the player", () => {
+  //eslint-disable-next-line max-len
+  it("should give the stats of the player as empty, if the player haven't present", () => {
     const users = ["raj", "krishna"];
     const playersStats = {};
-    const expectedStats = {};
     const masterMindDB = new MasterMindDB(users, playersStats, () => {});
 
-    assert.deepStrictEqual(masterMindDB.getPlayerStats("raj"), expectedStats);
+    assert.deepStrictEqual(masterMindDB.getPlayerStats("raj"), {});
   });
 
   describe("addGameStats", () => {
@@ -94,7 +94,7 @@ describe("masterMindDB", () => {
       const writeFile = context.mock.fn();
       const masterMindDB = new MasterMindDB(users, playersStats, writeFile);
       masterMindDB.addGameStats("raj", {
-        secretColorCombination: "RGBYW",
+        secretCombination: "RGBYW",
         isGameOver: true,
         hasWon: false,
         numberOfAttempts: 1,

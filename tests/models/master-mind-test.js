@@ -20,7 +20,7 @@ describe("MasterMind", () => {
     const masterMind = new MasterMind("RGBYW", 5);
     const guess = "WRGBW";
     const expectedGameStats = {
-      secretColorCombination: "RGBYW",
+      secretCombination: "RGBYW",
       isGameOver: true,
       hasWon: false,
       numberOfAttempts: 5,

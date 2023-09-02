@@ -1,6 +1,6 @@
 :root {
   --dark-color: rgb(58, 58, 58);
-  --light-color: rgb(221, 221, 221);
+  --light-color: #dedede;
 }
 
 * {
@@ -48,26 +48,38 @@ form {
   border-radius: 5px;
 }
 
+input[type="submit"] {
+  font-size: 1em;
+  padding: 0.5em;
+  font-weight: 400;
+  cursor: pointer;
+  border: 0.5px solid var(--dark-color);
+  border-radius: 5px;
+  color: var(--dark-color);
+  background-color: var(--light-color);
+  outline: none;
+}
+
+input[type="submit"]:focus {
+  border: 2px solid var(--dark-color);
+}
+
 form input[name="name"],
 input[name="password"] {
   font-size: 1em;
   padding: 0.5em;
   border: none;
   border-bottom: 1px solid grey;
+  outline: none;
+}
+
+form input[name="name"]:focus,
+input[name="password"]:focus {
+  border-bottom: 2px solid var(--dark-color);
 }
 
 #register-container {
   font-size: 0.8em;
-}
-
-#register-btn {
-  font-size: 1em;
-  padding: 0.5em;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  color: var(--light-color);
-  background-color: var(--dark-color);
 }
 
 #login-container {
@@ -89,4 +101,17 @@ input[name="password"] {
 
 .hide {
   display: none;
+}
+
+a[href="/login"] {
+  text-decoration: none;
+}
+
+a[href="/login"]:focus {
+  outline: 2px solid black;
+}
+
+header > a {
+  text-decoration: none;
+  color: var(--light-color);
 }

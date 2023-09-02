@@ -1,6 +1,7 @@
 const handlePlayerStats = (req, res) => {
   const masterMindDB = req.app.masterMindDB;
-  const player = req.cookies.name;
+  const player = req.params.player;
+
   res.send(masterMindDB.getPlayerStats(player));
 };
 
